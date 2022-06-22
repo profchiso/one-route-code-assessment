@@ -1,10 +1,10 @@
 const express = require("express")
 
 const messageRouter = express.Router();
-messageRouter.post("/text")
-messageRouter.post("/template")
-messageRouter.get("/:id")
-messageRouter.get("interactions")
+messageRouter.post("/text", () => "message")
+messageRouter.post("/template", () => "message")
+messageRouter.get("/:id", () => "message")
+messageRouter.get("interactions", () => "message")
 
 
 module.exports = {
