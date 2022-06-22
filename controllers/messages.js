@@ -2,6 +2,7 @@ const db = require("../models/index")
 exports.receiveMessage = async(req, res) => {
     try {
 
+
     } catch (error) {
         console.log(error)
 

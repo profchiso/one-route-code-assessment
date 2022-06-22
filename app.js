@@ -5,6 +5,21 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 const { logger } = require("./utils/logger")
+const { webhook } = require("./utils/webhook")
+
+//initialize webhook url
+const initializeWebhookURL = async() => {
+    try {
+        let setWebhookUrl = new webhook(process.env.WEBHOOK_URL)
+        await setWebhookUrl.setWebhookURL()
+
+    } catch (error) {
+        console.log(error)
+
+    }
+
+}
+initializeWebhookURL()
 
 //route imports
 const { messageRouter } = require("./routes/messages")
