@@ -1,9 +1,7 @@
 const express = require("express")
 
 const webhookRouter = express.Router();
-webhookRouter.post("/text")
-
-
+webhookRouter.post("/")
 
 module.exports = {
     webhookRouter
