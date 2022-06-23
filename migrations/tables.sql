@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS public."messageBodies"
         ON DELETE NO ACTION
 )
 
+
 CREATE TABLE IF NOT EXISTS public.messages
 (
-    id serial NOT NULL,
+    id serial NOT NULL ,
     recipient_type character varying(255) COLLATE pg_catalog."default",
     "to" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "from" character varying(255) COLLATE pg_catalog."default",

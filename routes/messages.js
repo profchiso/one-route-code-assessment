@@ -6,7 +6,7 @@ const messageRouter = express.Router();
 messageRouter.post("/", sendMessageValidation, sendMessage)
 messageRouter.post("/template", sendTemplateMessage)
 messageRouter.post("/receive", receiveMessage)
-messageRouter.get("interactions", listInteractions)
+messageRouter.get("/interactions", listInteractions)
 
 
 module.exports = {

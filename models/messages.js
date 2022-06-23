@@ -35,5 +35,9 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         modelName: 'messages',
     });
+    messages.associate = function(models) {
+        messages.belongsTo(models.messageBody, { foreignKey: 'id', as: 'text' })
+
+    }
     return messages;
 };
