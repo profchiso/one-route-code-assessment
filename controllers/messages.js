@@ -45,9 +45,12 @@ exports.sendTemplateMessage = async(req, res) => {
 }
 exports.listInteractions = async(req, res) => {
     try {
+        const interactions = await db.messages.findAll({ where: req.query, include: ["text"] })
+        res.status(200).json({ success: true, data: interactions })
 
     } catch (error) {
         console.log(error)
+        res.status(500).json({ success: false, errors: [{ message: error.message || "internal server error" }] })
 
     }
 }
