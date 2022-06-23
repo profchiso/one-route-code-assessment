@@ -9,7 +9,7 @@ const connectionValidation = [
     .isURL()
     .withMessage('Not a valid URL')
 ]
-const sendMessage = [
+const sendMessageValidation = [
     body("recipient_type")
     .trim()
     .notEmpty()
@@ -27,4 +27,4 @@ const sendMessage = [
     .withMessage("text field is required")
 
 ]
-module.exports = { connectionValidation, sendMessage }
+module.exports = { connectionValidation, sendMessageValidation }
