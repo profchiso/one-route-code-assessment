@@ -16,11 +16,6 @@ const DB_CONFIG = {
 }
 
 let sequelize;
-// if (config.use_env_variable) {
-//     sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-//     sequelize = new Sequelize(config.database, config.username, config.password, config);
-// }
 console.log("connecting to db.....")
 sequelize = new Sequelize(process.env.POSTGRES_DATABASE, process.env.POSTGRES_USERNAME, process.env.POSTGRES_PASSWORD, DB_CONFIG);
 console.log(" db connection successful")
