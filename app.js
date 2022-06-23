@@ -25,6 +25,7 @@ initializeWebhookURL()
 const { messageRouter } = require("./routes/messages")
 const { webhookRouter } = require("./routes/webhook")
 const { undefinedRouter } = require("./routes/undefinedRoute")
+const { connectionRouter } = require("./routes/wabaSandBoxConnection")
 
 //middlewares
 app.use(express.json());
@@ -44,6 +45,7 @@ app.get("/", (req, res) => {
 //mount routes to app
 app.use("/api/v1/messages", messageRouter);
 app.use("/api/v1/webhook", webhookRouter)
+app.use("/api/v1/connection", connectionRouter)
 app.use(undefinedRouter);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
