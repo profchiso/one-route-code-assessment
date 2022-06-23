@@ -22,8 +22,8 @@ exports.sendMessage = async(req, res) => {
             return res.status(400).json({ succes: false, errors: [{ field: "text.body", message: "body key in text must have a value" }] });
         }
 
-        const createdMessage = await db.messages.create({ recipient_type, to, type })
-        const createMessageBody = await db.messageBody.create({ body, messageId: createdMessage.id })
+        const createdMessage = await db.messages.create({ recipient_type, to, type, timestamps: new Date().getTime() })
+        const createMessageBody = await db.messageBody.create({ body, messageId: createdMessage.id, timestamps: new Date().getTime() })
 
         let getMessageAndbody = await db.messages.findOne({ where: { id: createdMessage.id }, include: ["text"] })
         console.log(getMessageAndbody)

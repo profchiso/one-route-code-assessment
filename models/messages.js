@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         type: {
             type: DataTypes.STRING
         },
+        timestamps: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'messages',

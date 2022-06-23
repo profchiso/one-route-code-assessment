@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     messageBody.init({
         body: DataTypes.STRING,
         messageId: DataTypes.INTEGER,
+        timestamps: DataTypes.INTEGER
 
     }, {
         sequelize,
