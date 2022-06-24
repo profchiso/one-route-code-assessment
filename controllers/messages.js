@@ -28,7 +28,7 @@ exports.sendMessage = async(req, res) => {
 
             let getMessageAndbody = await db.messages.findOne({ where: { id: createdMessage.id }, include: ["text"] })
 
-            let setUrl = await axios.post(`${process.env.SANDBOX_BASE_URL}/v1/messages`, req.body, {
+            let postedMessage = await axios.post(`${process.env.SANDBOX_BASE_URL}/v1/messages`, req.body, {
                 headers: {
                     "D360-API-KEY": `${process.env.WABA_SANDBOX_API_KEY}`,
                     "content-type": "application/json"
