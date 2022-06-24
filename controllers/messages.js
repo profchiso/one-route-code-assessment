@@ -21,13 +21,19 @@ exports.sendMessage = async(req, res) => {
         if (!body) {
             return res.status(400).json({ succes: false, errors: [{ field: "text.body", message: "body key in text must have a value" }] });
         }
-        console.log(req.body)
+
 
         const createdMessage = await db.messages.create({ recipient_type, to, type, from: process.env.SANDBOX_NUMBER, timestamps: new Date().getTime() })
         const createMessageBody = await db.messageBody.create({ body, messageId: createdMessage.id, timestamps: new Date().getTime() })
 
         let getMessageAndbody = await db.messages.findOne({ where: { id: createdMessage.id }, include: ["text"] })
-        console.log(getMessageAndbody)
+
+        let setUrl = await axios.post(`${process.env.SANDBOX_BASE_URL}/v1/messages`, req.body, {
+            headers: {
+                "D360-API-KEY": `${process.env.WABA_SANDBOX_API_KEY}`,
+                "content-type": "application/json"
+            }
+        })
 
         res.status(201).json({ success: true, data: getMessageAndbody })
 
