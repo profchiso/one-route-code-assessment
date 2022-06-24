@@ -18,6 +18,8 @@ webhookRouter.post("/", async(req, res) => {
                 return res.status(200).json({ success: true, data: message })
 
             } else {
+                console.log(req.body)
+                return res.status(200).json({ success: true, data: req.body })
 
             }
 
