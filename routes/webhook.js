@@ -2,14 +2,17 @@ const express = require("express")
 const { validationResult } = require('express-validator');
 const axios = require("axios")
 const { connectionValidation } = require("../utils/validations")
+const db = require("../models/index")
 
 const webhookRouter = express.Router();
 webhookRouter.post("/", async(req, res) => {
     try {
-        //console.log(req.body)
         console.log("messages", req.body.messages[0])
-        console.log("text", req.body.messages[0].test)
-        res.status(200).json({ success: true, data: req.body })
+
+        const savedMessage = await db.messages.create({ recipient_type: "individual", to: req.body.messages[0].from == "2348036009397" ? process.env.SANDBOX_NUMBER : "2348036009397", from: req.body.messages[0].from != "2348036009397" ? process.env.SANDBOX_NUMBER : "2348036009397", type: req.body.messages[0].type, timestamps: req.body.messages[0].timestamp })
+        const savedMessageBody = await db.messageBody.create({ messageId: savedMessage.id, body: req.body.messages[0].text.body })
+        const message = await db.messages.findAll({ where: { id: savedMessage.id }, include: ["text"] })
+        res.status(200).json({ success: true, data: message })
 
     } catch (error) {
         console.log(error)
