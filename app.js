@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 //root route
 app.get("/", (req, res) => {
-    res.status(200).json({ message: "Welecome to oneroute backend assessment" })
+    res.status(200).json({ success: true, message: "Welecome to oneroute backend assessment" })
 })
 
 //mount routes to app
