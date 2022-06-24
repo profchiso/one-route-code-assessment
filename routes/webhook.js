@@ -11,7 +11,7 @@ webhookRouter.post("/", async(req, res) => {
         if (req.body.messages) {
             console.log("messages", req.body.messages[0]) //
 
-            if (req.body.messages[0].from === process.env.USER_NUMBER) {
+            if (req.body.messages[0].from === process.env.USER_NUMBER && req.body.messages[0].type.toLowerCase() !== "template") {
                 const savedMessage = await db.messages.create({ recipient_type: "individual", to: req.body.messages[0].from == process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, from: req.body.messages[0].from != process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, type: req.body.messages[0].type, timestamps: req.body.messages[0].timestamp })
                 const savedMessageBody = await db.messageBody.create({ messageId: savedMessage.id, body: req.body.messages[0].text.body, timestamps: req.body.messages[0].timestamp })
                 const message = await db.messages.findAll({ where: { id: savedMessage.id }, include: ["text"] })
