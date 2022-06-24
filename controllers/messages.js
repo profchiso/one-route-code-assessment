@@ -22,20 +22,28 @@ exports.sendMessage = async(req, res) => {
             return res.status(400).json({ succes: false, errors: [{ field: "text.body", message: "body key in text must have a value" }] });
         }
 
+        if (type.toLowerCase() == "text") {
+            const createdMessage = await db.messages.create({ recipient_type, to, type, from: process.env.SANDBOX_NUMBER, timestamps: new Date().getTime() })
+            const createMessageBody = await db.messageBody.create({ body, messageId: createdMessage.id, timestamps: new Date().getTime() })
 
-        const createdMessage = await db.messages.create({ recipient_type, to, type, from: process.env.SANDBOX_NUMBER, timestamps: new Date().getTime() })
-        const createMessageBody = await db.messageBody.create({ body, messageId: createdMessage.id, timestamps: new Date().getTime() })
+            let getMessageAndbody = await db.messages.findOne({ where: { id: createdMessage.id }, include: ["text"] })
 
-        let getMessageAndbody = await db.messages.findOne({ where: { id: createdMessage.id }, include: ["text"] })
+            let setUrl = await axios.post(`${process.env.SANDBOX_BASE_URL}/v1/messages`, req.body, {
+                headers: {
+                    "D360-API-KEY": `${process.env.WABA_SANDBOX_API_KEY}`,
+                    "content-type": "application/json"
+                }
+            })
 
-        let setUrl = await axios.post(`${process.env.SANDBOX_BASE_URL}/v1/messages`, req.body, {
-            headers: {
-                "D360-API-KEY": `${process.env.WABA_SANDBOX_API_KEY}`,
-                "content-type": "application/json"
-            }
-        })
+            return res.status(201).json({ success: true, data: getMessageAndbody })
 
-        res.status(201).json({ success: true, data: getMessageAndbody })
+        } else if (type.toLowerCase() == "template") {
+
+
+        } else {
+            return res.status(400).json({ succes: false, errors: [{ field: "type", message: "Invalid message type" }] });
+        }
+
 
 
     } catch (error) {
