@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS public."messageBodies"
     id serial NOT NULL ,
     body character varying(255) COLLATE pg_catalog."default",
     "messageId" integer NOT NULL,
-    timestamps integer,
+    timestamps character varying(255) COLLATE pg_catalog."default",
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
     CONSTRAINT "messageBodies_pkey" PRIMARY KEY (id),
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS public.messages
     "to" character varying(255) COLLATE pg_catalog."default" NOT NULL,
     "from" character varying(255) COLLATE pg_catalog."default",
     type character varying(255) COLLATE pg_catalog."default",
-    timestamps integer,
+    timestamps character varying(255) COLLATE pg_catalog."default",
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
     CONSTRAINT messages_pkey PRIMARY KEY (id)
