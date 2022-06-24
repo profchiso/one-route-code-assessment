@@ -6,7 +6,9 @@ const { connectionValidation } = require("../utils/validations")
 const webhookRouter = express.Router();
 webhookRouter.post("/", async(req, res) => {
     try {
-        console.log(req.body)
+        //console.log(req.body)
+        console.log("messages", req.body.messages[0])
+        console.log("text", req.body.messages[0].test)
         res.status(200).json({ success: true, data: req.body })
 
     } catch (error) {
