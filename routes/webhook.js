@@ -9,7 +9,7 @@ webhookRouter.post("/", async(req, res) => {
     try {
 
         if (req.body.messages) {
-            console.log("messages", req.body.messages[0]) //
+            console.log("messages", req.body.conversation[0]) //
 
             if (req.body.messages[0].from === process.env.USER_NUMBER && req.body.messages[0].type.toLowerCase() !== "template") {
                 const savedMessage = await db.messages.create({ recipient_type: "individual", to: req.body.messages[0].from == process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, from: req.body.messages[0].from != process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, type: req.body.messages[0].type, timestamps: req.body.messages[0].timestamp })
@@ -24,7 +24,7 @@ webhookRouter.post("/", async(req, res) => {
             }
 
         } else {
-            console.log("messages", req.body)
+            console.log("not message", req.body)
             return res.status(200).json({ success: true, data: req.body })
         }
 
