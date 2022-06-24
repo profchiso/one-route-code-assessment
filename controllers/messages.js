@@ -21,6 +21,7 @@ exports.sendMessage = async(req, res) => {
         if (!body) {
             return res.status(400).json({ succes: false, errors: [{ field: "text.body", message: "body key in text must have a value" }] });
         }
+        console.log(req.body)
 
         const createdMessage = await db.messages.create({ recipient_type, to, type, from: process.env.SANDBOX_NUMBER, timestamps: new Date().getTime() })
         const createMessageBody = await db.messageBody.create({ body, messageId: createdMessage.id, timestamps: new Date().getTime() })
