@@ -13,7 +13,7 @@ To setup this project locally,
 3. User this link [Get 360dialog sandbox api key](https://wa.me/4930609859535?text=START) to generate your API key for your whatapp number
 
 4. Add the values of the environment variable as shown here [ENV vars](https://github.com/profchiso/one-route-code-assessment/blob/dev/sample.env)
-   - WABA_SANDBOX_API_KEY = **the api key you get from set 3**
+   - WABA_SANDBOX_API_KEY = **the api key you get from step 3**
    - SANDBOX_NUMBER = **the sandbox number which is 4930609859535**
    - USER_NUMBER = **Your whatapp phone number**
    - POSTGRES_DATABASE = **your local postgres database name**
