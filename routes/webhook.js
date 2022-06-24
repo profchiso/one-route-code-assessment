@@ -7,17 +7,25 @@ const db = require("../models/index")
 const webhookRouter = express.Router();
 webhookRouter.post("/", async(req, res) => {
     try {
-        console.log("messages", req.body.messages[0]) //
 
-        if (req.body.messages[0].from === process.env.USER_NUMBER) {
-            const savedMessage = await db.messages.create({ recipient_type: "individual", to: req.body.messages[0].from == process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, from: req.body.messages[0].from != process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, type: req.body.messages[0].type, timestamps: req.body.messages[0].timestamp })
-            const savedMessageBody = await db.messageBody.create({ messageId: savedMessage.id, body: req.body.messages[0].text.body, timestamps: req.body.messages[0].timestamp })
-            const message = await db.messages.findAll({ where: { id: savedMessage.id }, include: ["text"] })
-            return res.status(200).json({ success: true, data: message })
+        if (req.body.messages) {
+            console.log("messages", req.body.messages[0]) //
+
+            if (req.body.messages[0].from === process.env.USER_NUMBER) {
+                const savedMessage = await db.messages.create({ recipient_type: "individual", to: req.body.messages[0].from == process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, from: req.body.messages[0].from != process.env.USER_NUMBER ? process.env.SANDBOX_NUMBER : process.env.USER_NUMBER, type: req.body.messages[0].type, timestamps: req.body.messages[0].timestamp })
+                const savedMessageBody = await db.messageBody.create({ messageId: savedMessage.id, body: req.body.messages[0].text.body, timestamps: req.body.messages[0].timestamp })
+                const message = await db.messages.findAll({ where: { id: savedMessage.id }, include: ["text"] })
+                return res.status(200).json({ success: true, data: message })
+
+            } else {
+
+            }
 
         } else {
-
+            console.log("messages", req.body)
+            return res.status(200).json({ success: true, data: req.body })
         }
+
 
 
 
