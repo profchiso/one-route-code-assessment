@@ -7,7 +7,7 @@ const db = require("../models/index")
 const webhookRouter = express.Router();
 webhookRouter.post("/", async(req, res) => {
     try {
-        console.log("messages", req.body.messages[0])
+        console.log("messages", req.body.messages[0]) //
 
         const savedMessage = await db.messages.create({ recipient_type: "individual", to: req.body.messages[0].from == "2348036009397" ? process.env.SANDBOX_NUMBER : "2348036009397", from: req.body.messages[0].from != "2348036009397" ? process.env.SANDBOX_NUMBER : "2348036009397", type: req.body.messages[0].type, timestamps: req.body.messages[0].timestamp })
         const savedMessageBody = await db.messageBody.create({ messageId: savedMessage.id, body: req.body.messages[0].text.body })
