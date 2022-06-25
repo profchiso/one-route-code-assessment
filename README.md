@@ -24,5 +24,3 @@ To setup this project locally,
    - PORT = **3000 or your desired port number**
    - SANDBOX_BASE_URL = **https://waba-sandbox.360dialog.io**
    - WEBHOOK_URL = **https://one-route-test.herokuapp.com/api/v1/webhook**
-
-chh
