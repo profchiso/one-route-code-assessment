@@ -80,8 +80,14 @@ exports.sendTemplateMessage = async(req, res) => {
                 return res.status(201).json({ success: true, data: getMessageAndbody })
 
             } else if (type.toLowerCase() == "template") {
+                let postedMessage = await axios.post(`${process.env.SANDBOX_BASE_URL}/v1/messages`, req.body, {
+                    headers: {
+                        "D360-API-KEY": `${process.env.WABA_SANDBOX_API_KEY}`,
+                        "content-type": "application/json"
+                    }
+                })
 
-
+                return res.status(200).json({ success: true, data: postedMessage })
             } else {
                 return res.status(400).json({ succes: false, errors: [{ field: "type", message: "Invalid message type" }] });
             }
