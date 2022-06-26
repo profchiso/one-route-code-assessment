@@ -59,10 +59,10 @@ exports.sendTemplateMessage = async(req, res) => {
             //     return res.status(400).json({ succes: false, errors: errors.array() });
             // }
             const { recipient_type, to, type, text } = req.body
-            const { body } = text
-            // if (!body) {
-            //     return res.status(400).json({ succes: false, errors: [{ field: "text.body", message: "body key in text must have a value" }] });
-            // }
+                //const { body } = text
+                // if (!body) {
+                //     return res.status(400).json({ succes: false, errors: [{ field: "text.body", message: "body key in text must have a value" }] });
+                // }
 
             if (type.toLowerCase() == "text") {
                 const createdMessage = await db.messages.create({ recipient_type, to, type, from: process.env.SANDBOX_NUMBER, timestamps: new Date().getTime() })
