@@ -87,7 +87,7 @@ exports.sendTemplateMessage = async(req, res) => {
                     }
                 })
 
-                return res.status(200).json({ success: true, data: postedMessage })
+                return res.status(200).json({ success: true, data: postedMessage.data })
             } else {
                 return res.status(400).json({ succes: false, errors: [{ field: "type", message: "Invalid message type" }] });
             }
