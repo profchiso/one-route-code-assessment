@@ -26,4 +26,4 @@ To setup this project locally,
    - SANDBOX_BASE_URL = **https://waba-sandbox.360dialog.io**
    - WEBHOOK_URL = **https://one-route-test.herokuapp.com/api/v1/webhook**
 
-5. Run the application by typing the command `npm install`
+5. Run the application by typing the command `npm start`
